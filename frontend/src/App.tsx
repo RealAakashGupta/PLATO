@@ -3,6 +3,7 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import theme from './theme';
 import SignInDialog from "./components/SignInDialog";
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -31,20 +32,22 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <LandingPage
         onOpenAuth={() => setIsAuthOpen(true)}
         darkMode={darkMode}
         onToggle={handleToggle}
       />
-        <SignInDialog
-          isOpen={isAuthOpen}
-          onClose={() => {
-            setIsAuthOpen(false);
-            setAuthMode("signin");
-          }}
-          setAuth={setAuthMode}
-          onAuth={authMode}
-        />
+      <SignInDialog
+        isOpen={isAuthOpen}
+        onClose={() => {
+          setIsAuthOpen(false);
+          setAuthMode("signin");
+        }}
+        setAuth={setAuthMode}
+        onAuth={authMode}
+        darkMode={darkMode}
+      />
     </>
   );
 }
