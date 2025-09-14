@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import LandingPageNavbar from '../components/LandingPageNavbar'
 import { Typography, Box, Button } from '@mui/material';
 import SignInButton from '../components/SignInButton';
