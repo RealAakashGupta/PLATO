@@ -12,9 +12,9 @@ interface DarkModeToggleProps {
 const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ mode, onToggle }) => {
   return (
     <Tooltip title={mode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}>
-    <IconButton onClick={onToggle} color="inherit">
-      {mode === "light" ? <DarkModeIcon /> : <SunnyIcon />}
-    </IconButton>
+      <IconButton onClick={onToggle} color="inherit">
+        {mode === "light" ? <DarkModeIcon /> : <SunnyIcon />}
+      </IconButton>
     </Tooltip>
   );
 };
