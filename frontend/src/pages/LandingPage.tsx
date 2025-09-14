@@ -6,6 +6,8 @@ import theme from '../theme';
 
 interface LandingPageProps {
   onOpenAuth: () => void;
+  darkMode: boolean;
+  onToggle: () => void;
 }
 
 const getStarted = (onOpenAuth: () => void, darkMode: boolean) => {
@@ -51,18 +53,11 @@ const getStarted = (onOpenAuth: () => void, darkMode: boolean) => {
   );
 };
 
-const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth }) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const handleToggle = () => {
-    setDarkMode((prevMode) => !prevMode);
-    document.body.style.backgroundColor = darkMode
-      ? theme.light.background
-      : theme.dark.background;
-  };
+const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth, darkMode, onToggle }) => {
+  const currentTheme = darkMode ? theme.dark : theme.light;
   return (
     <div>
-      <LandingPageNavbar onOpenAuth={onOpenAuth} darkMode={darkMode} onToggle={handleToggle} />
+      <LandingPageNavbar onOpenAuth={onOpenAuth} darkMode={darkMode} onToggle={onToggle} />
       <Box sx={{ textAlign: "center", mt: 8 }}>{getStarted(onOpenAuth, darkMode)}</Box>
     </div>
   );
