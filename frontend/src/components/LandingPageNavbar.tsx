@@ -1,5 +1,7 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import SignInButton from "./SignInButton";
+import DarkModeToggle from "./DarkModeToggle";
 
 interface LandingPageNavbarProps {
   onOpenAuth: () => void;
@@ -9,7 +11,7 @@ const LandingPageNavbar: React.FC<LandingPageNavbarProps> = ({
   onOpenAuth,
 }) => {
   return (
-    <div className="min-h-screen bg-background">
+    <Box sx={{ backgroundColor: "#ffff" }}>
       <Box
         sx={{
           display: "flex",
@@ -27,17 +29,12 @@ const LandingPageNavbar: React.FC<LandingPageNavbarProps> = ({
           Plato
         </Typography>
 
-        <Button
-          variant="contained"
-          onClick={onOpenAuth}
-          sx={{
-            bgcolor: "#16a34a",
-            "&:hover": { bgcolor: "#15803d" },
-          }}>
-          Sign In
-        </Button>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <DarkModeToggle mode="light" onToggle={() => {}} />
+          <SignInButton onOpenAuth={onOpenAuth} signInText="Sign In" />
+        </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 
