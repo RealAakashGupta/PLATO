@@ -1,31 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LandingPageNavbar from '../components/LandingPageNavbar'
 import { Typography, Box, Button } from '@mui/material';
 import SignInButton from '../components/SignInButton';
+import theme from '../theme';
 
 interface LandingPageProps {
   onOpenAuth: () => void;
 }
 
-const getStarted = (onOpenAuth: () => void) => {
+const getStarted = (onOpenAuth: () => void, darkMode: boolean) => {
+  const currentTheme = darkMode ? theme.dark : theme.light;
   return (
-    <Box sx={{ textAlign: "center", mt: 8 }}>
+    <Box sx={{ textAlign: "center", mt: 8, color: currentTheme.text }}>
       <Box>
         <Typography
           variant="h3"
           component="h1"
-          sx={{ fontWeight: "bold", mb: 2 }}>
+          sx={{ fontWeight: "bold", mb: 2, color: currentTheme.primary }}>
           Fighting Food Waste,
         </Typography>
         <Typography
           variant="h3"
           component="h1"
-          sx={{ fontWeight: "bold", mb: 2 }}>
+          sx={{ fontWeight: "bold", mb: 2, color: currentTheme.primary }}>
           Feeding Communities
         </Typography>
       </Box>
       <Box sx={{ mt: 4, maxWidth: 600, margin: "0 auto" }}>
-        <Typography variant="h6" component="p" sx={{ color: "#555" }}>
+        <Typography variant="h6" component="p" sx={{ color: currentTheme.text }}>
           Connect donors, volunteers, and NGOs to redirect surplus food from
           waste to those who need it most. Together, we can build a sustainable
           future.
@@ -37,10 +39,10 @@ const getStarted = (onOpenAuth: () => void) => {
         <Button
           variant="outlined"
           sx={{
-            bgcolor: "#ffff",
-            borderColor: "#A7A2A9",
-            color: "#6C7075",
-            "&:hover": { bgcolor: "#A7A2A9", borderColor: "#ffff", color: "#ffff"},
+            bgcolor: currentTheme.background,
+            borderColor: currentTheme.text,
+            color: currentTheme.text,
+            "&:hover": { bgcolor: currentTheme.text, borderColor: currentTheme.background, color: currentTheme.background },
           }}>
           Learn More
         </Button>
@@ -49,12 +51,19 @@ const getStarted = (onOpenAuth: () => void) => {
   );
 };
 
-const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth }) =>{
+const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth }) => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleToggle = () => {
+    setDarkMode((prevMode) => !prevMode);
+    document.body.style.backgroundColor = darkMode
+      ? theme.light.background
+      : theme.dark.background;
+  };
   return (
     <div>
-      <LandingPageNavbar onOpenAuth={onOpenAuth} />
-          <Box sx={{ textAlign: "center", mt: 8 }}>{getStarted(onOpenAuth)}</Box>
-          
+      <LandingPageNavbar onOpenAuth={onOpenAuth} darkMode={darkMode} onToggle={handleToggle} />
+      <Box sx={{ textAlign: "center", mt: 8 }}>{getStarted(onOpenAuth, darkMode)}</Box>
     </div>
   );
 }
