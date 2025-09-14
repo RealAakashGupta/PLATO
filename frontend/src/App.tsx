@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import LandingPage from './pages/LandingPage';
 import theme from './theme';
+import SignInDialog from "./components/SignInDialog";
 
 function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('darkMode');
@@ -28,13 +30,22 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       <LandingPage
         onOpenAuth={() => setIsAuthOpen(true)}
         darkMode={darkMode}
         onToggle={handleToggle}
       />
-    </div>
+        <SignInDialog
+          isOpen={isAuthOpen}
+          onClose={() => {
+            setIsAuthOpen(false);
+            setAuthMode("signin");
+          }}
+          setAuth={setAuthMode}
+          onAuth={authMode}
+        />
+    </>
   );
 }
 
