@@ -50,21 +50,6 @@ const SingInForm: React.FC<{
     console.log("Signing in with:", formData);
     toast.success("Login successful!");
     };
-    
-      const inputStyles = {
-    input: { color: currentTheme.text }, // text color
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: currentTheme.text, // default border
-      },
-      "&:hover fieldset": {
-        borderColor: currentTheme.primary, // hover border
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: currentTheme.primary, // focused border
-      },
-    },
-      };
       
   return (
     <Box>

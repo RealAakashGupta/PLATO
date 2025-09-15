@@ -10,8 +10,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { RoleOption, roleOptions } from "../utils/SignUp";
+import {
+  defaultSignUpData,
+  RoleOption,
+  roleOptions,
+  SignUpData,
+  validateConfirmPassword,
+  validateEmail,
+  validatePassword,
+} from "../utils/SignUp";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import toast from "react-hot-toast";
 interface SignUpDialogProps {
   currentTheme: any;
   onAuth: "signin" | "signup";
@@ -23,21 +32,161 @@ const SignUpForm: React.FC<{
   onAuth: "signin" | "signup";
   setAuth: (auth: "signin" | "signup") => void;
 }> = ({ currentTheme, onAuth, setAuth }) => {
+  const [formData, setFormData] = useState<SignUpData>(defaultSignUpData);
+  const [error, setError] = useState<string>("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (!validateEmail(formData.email)) {
+      toast.error("Invalid email format");
+      return;
+    }
+
+    if (!validatePassword(formData.password)) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
+    if (!validateConfirmPassword(formData.password, formData.confirmPassword)) {
+      toast.error("Password didn't match");
+      return;
+    }
+    // Simulate login API
+    console.log("Signing up with:", formData);
+    toast.success("Successfully Created!!");
+  };
+
   return (
-    <Box>
-      <Box sx={{ width: "100%", textAlign: "center" }}>
-        <Box sx={{ my: 2 }}>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              width: "100%",
-              textAlign: "center",
-              bgcolor: currentTheme?.primary,
-            }}>
-            Sign Up
-          </Button>
-        </Box>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        textAlign: "center",
+        mt: 2,
+        backgroundColor: currentTheme.background,
+        color: currentTheme.text,
+      }}>
+      <TextField
+        autoFocus
+        label="Name"
+        name="name"
+        type="text"
+        fullWidth
+        margin="normal"
+        value={formData.name}
+        onChange={handleChange}
+        InputLabelProps={{ style: { color: currentTheme.text } }}
+        sx={{
+          input: { color: currentTheme.text }, // text color
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: currentTheme.text, // default border
+            },
+            "&:hover fieldset": {
+              borderColor: currentTheme.primary, // hover border
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: currentTheme.primary, // focused border
+            },
+          },
+        }}
+      />
+      <TextField
+        label="Email"
+        name="email"
+        type="email"
+        fullWidth
+        margin="normal"
+        value={formData.email}
+        onChange={handleChange}
+        InputLabelProps={{ style: { color: currentTheme.text } }}
+        sx={{
+          input: { color: currentTheme.text }, // text color
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: currentTheme.text, // default border
+            },
+            "&:hover fieldset": {
+              borderColor: currentTheme.primary, // hover border
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: currentTheme.primary, // focused border
+            },
+          },
+        }}
+      />
+
+      <TextField
+        label="Password"
+        name="password"
+        type="password"
+        fullWidth
+        margin="normal"
+        value={formData.password}
+        onChange={handleChange}
+        InputLabelProps={{ style: { color: currentTheme.text } }}
+        sx={{
+          input: { color: currentTheme.text }, // text color
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: currentTheme.text, // default border
+            },
+            "&:hover fieldset": {
+              borderColor: currentTheme.primary, // hover border
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: currentTheme.primary, // focused border
+            },
+          },
+        }}
+      />
+      <TextField
+        label="Confirm Password"
+        name="confirmPassword"
+        type="password"
+        fullWidth
+        margin="normal"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+        InputLabelProps={{ style: { color: currentTheme.text } }}
+        sx={{
+          input: { color: currentTheme.text }, // text color
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: currentTheme.text, // default border
+            },
+            "&:hover fieldset": {
+              borderColor: currentTheme.primary, // hover border
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: currentTheme.primary, // focused border
+            },
+          },
+        }}
+      />
+
+      {error && (
+        <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+          {error}
+        </Typography>
+      )}
+      <Box sx={{ my: 2 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            width: "100%",
+            textAlign: "center",
+            bgcolor: currentTheme?.primary,
+          }}>
+          Sign Up
+        </Button>
       </Box>
     </Box>
   );
@@ -54,11 +203,8 @@ const ChooseRole: React.FC<{
   const handleRoleSelect = (roleKey: string) => {
     setSelectedRole(roleKey);
     setFormData({}); // reset fields on role change
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+    };
+    
   return (
     <Box>
       <Box sx={{ backgroundColor: currentTheme.background }}>
@@ -86,7 +232,6 @@ const ChooseRole: React.FC<{
                 justifyContent: "space-between", // pushes label left, radio right
               }}
               onClick={() => handleRoleSelect(role.key)}>
-              {/* Label & Description */}
               <Box>
                 <Box sx={{ display: "flex", mb: 2, justifyContent: "justify" }}>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -142,6 +287,7 @@ const ChooseRole: React.FC<{
         <Box sx={{ my: 2 }}>
           <Button
             onClick={goNext}
+            disabled={!selectedRole}
             variant="contained"
             sx={{
               width: "100%",
