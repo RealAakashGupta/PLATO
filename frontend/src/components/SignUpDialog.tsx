@@ -128,7 +128,7 @@ const ChooseRole: React.FC<{
   setAuth: (auth: "signin" | "signup") => void;
 }> = ({ currentTheme, goNext, onAuth, setAuth }) => {
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [_formData, setFormData] = useState<Record<string, string>>({});
 
   const handleRoleSelect = (roleKey: string) => {
     setSelectedRole(roleKey);
@@ -272,7 +272,7 @@ const SignUpDialog: React.FC<SignUpDialogProps> = ({
         />
       )}
 
-      <Box sx={{ width: "100%", textAlign: "center" }}>
+      <Box sx={{ width: "100%", textAlign: "center", pt:2}}>
         <hr />
         <Typography>Already fighting food waste with us?</Typography>
         <Button
