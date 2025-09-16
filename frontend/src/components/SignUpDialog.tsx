@@ -277,7 +277,7 @@ const SignUpDialog: React.FC<SignUpDialogProps> = ({
         />
       )}
 
-      <Box sx={{ width: "100%", textAlign: "center" }}>
+      <Box sx={{ width: "100%", textAlign: "center", pt:2}}>
         <hr />
         <Typography>Already fighting food waste with us?</Typography>
         <Button

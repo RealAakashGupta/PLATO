@@ -8,6 +8,16 @@ const theme = {
     aboutUsBackground: "#f1f1f1ff",
     lightText: "#818282",
     primaryButton: "#16a34a",
+    roleBgColors: {
+      donor: "#00a2ffff",
+      volunteer: "#00e052ff",
+      ngo: "#9829ffff",
+    },
+    roleColors: {
+      donor: "#004683ff",
+      volunteer: "#014b1cff",
+      ngo: "#320060ff",
+    }
   },
   dark: {
     background: "#121212",
@@ -18,7 +28,17 @@ const theme = {
     aboutUsBackground: "#1E1E1E",
     lightText: "#c6c8c8",
     primaryButton: "#16a34a",
-  },
+    roleBgColors: {
+      donor: "#64b5f6",
+      volunteer: "#5dd361ff",
+      ngo: "#ab87cdff",
+    },
+    roleColors: {
+      donor: "#004e92ff",
+      volunteer: "#0a5e29ff",
+      ngo: "#5400a3ff",
+    },
+  }
 };
 
 export default theme;

@@ -158,13 +158,13 @@ const RoleTypeCards: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
                 <Box sx={{ height: 200 }}>
                   <Avatar
                     sx={{
-                      bgcolor: currentTheme.primary,
+                      bgcolor: currentTheme.roleBgColors[role.key],
                       width: 64,
                       height: 64,
                       mx: "auto",
                       mb: 2,
                     }}>
-                    <role.icon />
+                    <role.icon sx={{ width: "45%", height: "45%", color: currentTheme.roleColors[role.key] }} />
                   </Avatar>
                   <Typography
                     variant="h6"
@@ -242,7 +242,7 @@ const JoinUsComponent: React.FC<{
       <Typography variant="h5" sx={{ color: "#ffff", py: 2 }}>
         Join our community and help create a world with zero food waste
       </Typography>
-      <Box sx={{pt:2}}>
+      <Box sx={{ pt: 2 }}>
         <SignInButton
           onOpenAuth={onOpenAuth}
           signInText="Join Plato Today"
@@ -253,12 +253,12 @@ const JoinUsComponent: React.FC<{
       </Box>
     </Box>
   );
-  };
+};
 
 const Footer: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
   return (
-    <Box sx={{p:4, textAlign:"center"}}>
-      <Typography variant="body1" sx={{ color: currentTheme.lightText}}>
+    <Box sx={{ p: 4, textAlign: "center" }}>
+      <Typography variant="body1" sx={{ color: currentTheme.lightText }}>
         {" "}
         &copy; 2025 Plato. Fighting food waste, one meal at a time.
       </Typography>
