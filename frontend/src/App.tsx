@@ -42,7 +42,6 @@ function App() {
         isOpen={isAuthOpen}
         onClose={() => {
           setIsAuthOpen(false);
-          setAuthMode("signin");
         }}
         setAuth={setAuthMode}
         onAuth={authMode}

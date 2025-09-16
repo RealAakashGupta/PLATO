@@ -1,12 +1,18 @@
-import React from 'react'
-import { Box, Button } from '@mui/material';
+import React from "react";
+import { Box, Button } from "@mui/material";
 interface SignInButtonProps {
   signInText: string;
   onOpenAuth: () => void;
+  bgcolor: string;
+  bgHoverColor: string;
+    textColor: string;
 }
 const SignInButton: React.FC<SignInButtonProps> = ({
   onOpenAuth,
   signInText,
+  bgcolor,
+  bgHoverColor,
+  textColor,
 }) => {
   return (
     <Box>
@@ -14,8 +20,9 @@ const SignInButton: React.FC<SignInButtonProps> = ({
         variant="contained"
         onClick={onOpenAuth}
         sx={{
-          bgcolor: "#16a34a",
-          "&:hover": { bgcolor: "#15803d" },
+          bgcolor: bgcolor,
+          "&:hover": { bgcolor: bgHoverColor },
+          color: textColor,
         }}>
         {signInText}
       </Button>
@@ -23,4 +30,4 @@ const SignInButton: React.FC<SignInButtonProps> = ({
   );
 };
 
-export default SignInButton
+export default SignInButton;

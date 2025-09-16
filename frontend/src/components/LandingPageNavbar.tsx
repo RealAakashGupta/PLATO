@@ -19,10 +19,11 @@ const LandingPageNavbar: React.FC<LandingPageNavbarProps> = ({
   const currentTheme = darkMode ? theme.dark : theme.light;
 
   return (
-    <Box sx={{
-      backgroundColor: currentTheme.background,
-      color: currentTheme.text
-    }}>
+    <Box
+      sx={{
+        backgroundColor: currentTheme.background,
+        color: currentTheme.text,
+      }}>
       <Box
         sx={{
           display: "flex",
@@ -41,8 +42,17 @@ const LandingPageNavbar: React.FC<LandingPageNavbarProps> = ({
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <DarkModeToggle mode={darkMode ? "dark" : "light"} onToggle={onToggle} />
-          <SignInButton onOpenAuth={onOpenAuth} signInText="Sign In" />
+          <DarkModeToggle
+            mode={darkMode ? "dark" : "light"}
+            onToggle={onToggle}
+          />
+          <SignInButton
+            onOpenAuth={onOpenAuth}
+            signInText="Sign In"
+            bgcolor={currentTheme.primaryButton}
+            bgHoverColor={currentTheme.primary}
+            textColor="#ffff"
+          />
         </Box>
       </Box>
     </Box>
