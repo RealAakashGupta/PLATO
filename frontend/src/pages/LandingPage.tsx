@@ -1,9 +1,18 @@
 import React from "react";
 import LandingPageNavbar from "../components/LandingPageNavbar";
-import { Typography, Box, Button, CardHeader, CardContent, Card, Avatar } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  CardHeader,
+  CardContent,
+  Card,
+  Avatar,
+} from "@mui/material";
 import SignInButton from "../components/SignInButton";
 import theme from "../theme";
 import { RoleOption, roleOptions } from "../utils/SignUp";
+import { FoodWastageInfo, foodWastageInfo } from "../utils/MiscellaneousInfo";
 
 interface LandingPageProps {
   onOpenAuth: () => void;
@@ -103,7 +112,7 @@ const AboutUs: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
           Our platform connects three key groups to create an efficient food
           redistribution network
         </Typography>
-        <Box sx={{pt:4}}>
+        <Box sx={{ pt: 4 }}>
           <RoleTypeCards currentTheme={currentTheme} />
         </Box>
       </Box>
@@ -175,6 +184,45 @@ const RoleTypeCards: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
   );
 };
 
+const WastageData: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
+  return (
+    <Box
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+      gap={3} // spacing between cards
+      p={4}
+      my={6}>
+      {foodWastageInfo.map((food: FoodWastageInfo, index) => (
+        <Box
+          key={index}
+          flex="1 1 300px" // responsive width
+          sx={{
+            px: 5,
+            textAlign: "center",
+          }}>
+          <CardHeader
+            title={
+              <Box>
+                <Typography
+                  variant="h3"
+                  fontWeight="bold"
+                  sx={{ color: currentTheme.primary }}>
+                  {food.wastageValue}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ color: currentTheme.lightText }}>
+                  {food.wastageInfo}
+                </Typography>
+              </Box>
+            }
+          />
+        </Box>
+      ))}
+    </Box>
+  );
+};
 const LandingPage: React.FC<LandingPageProps> = ({
   onOpenAuth,
   darkMode,
@@ -194,7 +242,9 @@ const LandingPage: React.FC<LandingPageProps> = ({
       <Box sx={{ textAlign: "center", mt: 8 }}>
         <AboutUs currentTheme={currentTheme} />
       </Box>
-      
+      <Box>
+        <WastageData currentTheme={currentTheme} />
+      </Box>
     </div>
   );
 };

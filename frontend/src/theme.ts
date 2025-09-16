@@ -6,6 +6,7 @@ const theme = {
     primary: "#15803d",
     text_heading: "#3c3c40ff",
     aboutUsBackground: "#f1f1f1ff",
+    lightText: "#818282",
   },
   dark: {
     background: "#121212",
@@ -14,6 +15,7 @@ const theme = {
     primary: "#4caf50",
     text_heading: "#a9a9b7ff",
     aboutUsBackground: "#1E1E1E",
+    lightText: "#c6c8c8",
   },
 };
 
