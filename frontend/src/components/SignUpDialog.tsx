@@ -15,6 +15,8 @@ import {
   RoleOption,
   roleOptions,
   SignUpData,
+  SignUpField,
+  signUpFields,
   validateConfirmPassword,
   validateEmail,
   validatePassword,
@@ -72,105 +74,33 @@ const SignUpForm: React.FC<{
         backgroundColor: currentTheme.background,
         color: currentTheme.text,
       }}>
-      <TextField
-        autoFocus
-        label="Name"
-        name="name"
-        type="text"
-        fullWidth
-        margin="normal"
-        value={formData.name}
-        onChange={handleChange}
-        InputLabelProps={{ style: { color: currentTheme.text } }}
-        sx={{
-          input: { color: currentTheme.text }, // text color
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: currentTheme.text, // default border
+      {signUpFields.map((field: SignUpField) => (
+        <TextField
+          autoFocus
+          label={field.label}
+          name={field.name}
+          type={field.type}
+          fullWidth
+          margin="normal"
+          value={formData[field.name as keyof SignUpData]}
+          onChange={handleChange}
+          InputLabelProps={{ style: { color: currentTheme.text } }}
+          sx={{
+            input: { color: currentTheme.text }, // text color
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: currentTheme.text, // default border
+              },
+              "&:hover fieldset": {
+                borderColor: currentTheme.primary, // hover border
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: currentTheme.primary,
+              },
             },
-            "&:hover fieldset": {
-              borderColor: currentTheme.primary, // hover border
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: currentTheme.primary, // focused border
-            },
-          },
-        }}
-      />
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        fullWidth
-        margin="normal"
-        value={formData.email}
-        onChange={handleChange}
-        InputLabelProps={{ style: { color: currentTheme.text } }}
-        sx={{
-          input: { color: currentTheme.text }, // text color
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: currentTheme.text, // default border
-            },
-            "&:hover fieldset": {
-              borderColor: currentTheme.primary, // hover border
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: currentTheme.primary, // focused border
-            },
-          },
-        }}
-      />
-
-      <TextField
-        label="Password"
-        name="password"
-        type="password"
-        fullWidth
-        margin="normal"
-        value={formData.password}
-        onChange={handleChange}
-        InputLabelProps={{ style: { color: currentTheme.text } }}
-        sx={{
-          input: { color: currentTheme.text }, // text color
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: currentTheme.text, // default border
-            },
-            "&:hover fieldset": {
-              borderColor: currentTheme.primary, // hover border
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: currentTheme.primary, // focused border
-            },
-          },
-        }}
-      />
-      <TextField
-        label="Confirm Password"
-        name="confirmPassword"
-        type="password"
-        fullWidth
-        margin="normal"
-        value={formData.confirmPassword}
-        onChange={handleChange}
-        InputLabelProps={{ style: { color: currentTheme.text } }}
-        sx={{
-          input: { color: currentTheme.text }, // text color
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: currentTheme.text, // default border
-            },
-            "&:hover fieldset": {
-              borderColor: currentTheme.primary, // hover border
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: currentTheme.primary, // focused border
-            },
-          },
-        }}
-      />
-
+          }}
+        />
+      ))}
       {error && (
         <Typography color="error" variant="body2" sx={{ mt: 1 }}>
           {error}
@@ -203,8 +133,8 @@ const ChooseRole: React.FC<{
   const handleRoleSelect = (roleKey: string) => {
     setSelectedRole(roleKey);
     setFormData({}); // reset fields on role change
-    };
-    
+  };
+
   return (
     <Box>
       <Box sx={{ backgroundColor: currentTheme.background }}>
@@ -293,6 +223,10 @@ const ChooseRole: React.FC<{
               width: "100%",
               textAlign: "center",
               bgcolor: currentTheme?.primary,
+              "&.Mui-disabled": {
+                bgcolor: currentTheme?.navbarBackground,
+                color: currentTheme?.text,
+              },
             }}>
             Next
           </Button>

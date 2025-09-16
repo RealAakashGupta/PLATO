@@ -96,3 +96,16 @@ export const signUp = async (data: SignUpData): Promise<boolean> => {
   console.log("Signing up with:", data);
   return new Promise((resolve) => setTimeout(() => resolve(true), 1000));
 };
+
+export interface SignUpField {
+  label: string;
+  name: "name" | "email" | "password" | "confirmPassword";
+  type: string;
+}
+
+export const signUpFields: SignUpField[] = [
+  { label: "Name", name: "name", type: "text" },
+  { label: "Email", name: "email", type: "email" },
+  { label: "Password", name: "password", type: "password" },
+  { label: "Confirm Password", name: "confirmPassword", type: "password" },
+];

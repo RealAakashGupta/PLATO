@@ -35,3 +35,14 @@ export const signIn = async (data: SignInData): Promise<boolean> => {
   console.log('Signing in with:', data);
   return new Promise((resolve) => setTimeout(() => resolve(true), 1000));
 };
+
+export interface SignInField {
+  label: string;
+  name: "email" | "password";
+  type: string;
+}
+
+export const signInFields: SignInField[] = [
+  { label: "Email", name: "email", type: "email" },
+  { label: "Password", name: "password", type: "password" },
+];

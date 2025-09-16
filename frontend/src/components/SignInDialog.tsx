@@ -4,7 +4,9 @@ import toast from "react-hot-toast";
 
 import {
   SignInData,
+  SignInField,
   defaultSignInData,
+  signInFields,
   validateEmail,
   validatePassword,
 } from "../utils/SignIn";
@@ -49,8 +51,8 @@ const SingInForm: React.FC<{
     // Simulate login API
     console.log("Signing in with:", formData);
     toast.success("Login successful!");
-    };
-      
+  };
+
   return (
     <Box>
       <Typography
@@ -76,57 +78,33 @@ const SingInForm: React.FC<{
           backgroundColor: currentTheme.background,
           color: currentTheme.text,
         }}>
-        <TextField
-          autoFocus
-          label="Email"
-          name="email"
-          type="email"
-          fullWidth
-          margin="normal"
-          value={formData.email}
-          onChange={handleChange}
-          InputLabelProps={{ style: { color: currentTheme.text } }}
-          sx={{
-            input: { color: currentTheme.text }, // text color
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: currentTheme.text, // default border
+        {signInFields.map((field: SignInField) => (
+          <TextField
+            autoFocus
+            label={field.label}
+            name={field.name}
+            type={field.type}
+            fullWidth
+            margin="normal"
+            value={formData[field.name as keyof SignInData]}
+            onChange={handleChange}
+            InputLabelProps={{ style: { color: currentTheme.text } }}
+            sx={{
+              input: { color: currentTheme.text }, // text color
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: currentTheme.text, // default border
+                },
+                "&:hover fieldset": {
+                  borderColor: currentTheme.primary, // hover border
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: currentTheme.primary,
+                },
               },
-              "&:hover fieldset": {
-                borderColor: currentTheme.primary, // hover border
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: currentTheme.primary, // focused border
-              },
-            },
-          }}
-        />
-
-        <TextField
-          label="Password"
-          name="password"
-          type="password"
-          fullWidth
-          margin="normal"
-          value={formData.password}
-          onChange={handleChange}
-          InputLabelProps={{ style: { color: currentTheme.text } }}
-          sx={{
-            input: { color: currentTheme.text }, // text color
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: currentTheme.text, // default border
-              },
-              "&:hover fieldset": {
-                borderColor: currentTheme.primary, // hover border
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: currentTheme.primary, // focused border
-              },
-            },
-          }}
-        />
-
+            }}
+          />
+        ))}
         {error && (
           <Typography color="error" variant="body2" sx={{ mt: 1 }}>
             {error}
