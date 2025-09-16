@@ -7,28 +7,11 @@ export interface RoleOption {
   description: string;
   icon: React.ElementType;
   benefits?: string[];
-  landingPageLabel:string;
+  landingPageLabel: string;
   landingPageDepsription1: string;
   landingPageDepsription2: string;
 }
 export const roleOptions: RoleOption[] = [
-  {
-    key: "volunteer",
-    label: "Volunteer",
-    description: "Help collect and distribute food to communities in need",
-    icon: GroupOutlinedIcon,
-    //   color: "text-green-600 bg-green-50 border-green-200",
-    benefits: [
-      "Earn impact points",
-      "Join local missions",
-      "Build community connections",
-    ],
-    landingPageLabel: "Volunteers",
-    landingPageDepsription1:
-      "Community members who help with food collection and distribution",
-    landingPageDepsription2:
-      "Join pickup and delivery missions to bridge the gap between donors and recipients",
-  },
   {
     key: "donor",
     label: "Donor",
@@ -45,6 +28,23 @@ export const roleOptions: RoleOption[] = [
       "Restaurants, grocery stores, and individuals with surplus food",
     landingPageDepsription2:
       "Report available food donations and connect with nearby organizations to prevent waste",
+  },
+  {
+    key: "volunteer",
+    label: "Volunteer",
+    description: "Help collect and distribute food to communities in need",
+    icon: GroupOutlinedIcon,
+    //   color: "text-green-600 bg-green-50 border-green-200",
+    benefits: [
+      "Earn impact points",
+      "Join local missions",
+      "Build community connections",
+    ],
+    landingPageLabel: "Volunteers",
+    landingPageDepsription1:
+      "Community members who help with food collection and distribution",
+    landingPageDepsription2:
+      "Join pickup and delivery missions to bridge the gap between donors and recipients",
   },
   {
     key: "ngo",
