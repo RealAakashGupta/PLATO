@@ -1,9 +1,7 @@
 import React from 'react'
 
-function DonorsDashboard() {
-  return (
-    <div>DonorsDashboard</div>
-  )
-}
+const DonorsDashboard: React.FC<{ username: string }> = (username) => {
+  return <div>DonorsDashboard</div>;
+};
 
 export default DonorsDashboard

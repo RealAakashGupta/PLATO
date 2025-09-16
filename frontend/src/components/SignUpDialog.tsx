@@ -26,8 +26,9 @@ import toast from "react-hot-toast";
 interface SignUpDialogProps {
   currentTheme: any;
   onAuth: "signin" | "signup";
-    setAuth: (auth: "signin" | "signup") => void;
-    onClose: () => void;
+  setAuth: (auth: "signin" | "signup") => void;
+  onClose: () => void;
+  onSuccess: (user: { username: string, role: string }) => void;
 }
 
 const SignUpForm: React.FC<{
@@ -35,12 +36,22 @@ const SignUpForm: React.FC<{
   onAuth: "signin" | "signup";
   setAuth: (auth: "signin" | "signup") => void;
   onClose: () => void;
-}> = ({ currentTheme, onAuth, setAuth, onClose }) => {
-  const [formData, setFormData] = useState<SignUpData>(defaultSignUpData);
+  onSuccess: (user: { username: string; role: string }) => void;
+  formData: SignUpData;
+  setFormData: React.Dispatch<React.SetStateAction<SignUpData>>;
+}> = ({
+  currentTheme,
+  onAuth,
+  setAuth,
+  onClose,
+  onSuccess,
+  formData,
+  setFormData,
+}) => {
   const [error, setError] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -63,8 +74,9 @@ const SignUpForm: React.FC<{
     }
     // Simulate login API
     console.log("Signing up with:", formData);
-    onClose();
     toast.success("Successfully Created!!");
+    onSuccess({ username: formData.email.split("@")[0], role: formData.role });
+    onClose();
   };
 
   return (
@@ -129,13 +141,12 @@ const ChooseRole: React.FC<{
   onAuth: "signin" | "signup";
   goNext: () => void;
   setAuth: (auth: "signin" | "signup") => void;
-}> = ({ currentTheme, goNext, onAuth, setAuth }) => {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  formData: SignUpData;
+  setFormData: React.Dispatch<React.SetStateAction<SignUpData>>;
+}> = ({ currentTheme, goNext, onAuth, setAuth, formData, setFormData }) => {
 
   const handleRoleSelect = (roleKey: string) => {
-    setSelectedRole(roleKey);
-    setFormData({}); // reset fields on role change
+    setFormData((prev) => ({ ...prev, role: roleKey as any }));
   };
 
   return (
@@ -145,7 +156,7 @@ const ChooseRole: React.FC<{
           Choose Your Role
         </Typography>
         {roleOptions.map((role: RoleOption) => {
-          const isSelected = selectedRole === role.key;
+          const isSelected = formData.role === role.key;
           return (
             <Box
               key={role.key}
@@ -220,7 +231,7 @@ const ChooseRole: React.FC<{
         <Box sx={{ my: 2 }}>
           <Button
             onClick={goNext}
-            disabled={!selectedRole}
+            disabled={!formData.role}
             variant="contained"
             sx={{
               width: "100%",
@@ -243,9 +254,12 @@ const SignUpDialog: React.FC<SignUpDialogProps> = ({
   onAuth,
   setAuth,
   onClose,
+  onSuccess,
 }) => {
   const [step, setStep] = useState<"role" | "form">("role");
-
+    const [formData, setFormData] = useState<SignUpData>({
+      ...defaultSignUpData,
+    });
   return (
     <Box>
       <Typography
@@ -267,17 +281,22 @@ const SignUpDialog: React.FC<SignUpDialogProps> = ({
           goNext={() => setStep("form")}
           onAuth={onAuth}
           setAuth={setAuth}
+          formData={formData}
+          setFormData={setFormData}
         />
       ) : (
         <SignUpForm
           currentTheme={currentTheme}
           onAuth={onAuth}
-                      setAuth={setAuth}
-                      onClose={onClose}
+          setAuth={setAuth}
+          onClose={onClose}
+          onSuccess={onSuccess}
+          formData={formData}
+          setFormData={setFormData}
         />
       )}
 
-      <Box sx={{ width: "100%", textAlign: "center", pt:2}}>
+      <Box sx={{ width: "100%", textAlign: "center", pt: 2 }}>
         <hr />
         <Typography>Already fighting food waste with us?</Typography>
         <Button
