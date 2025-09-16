@@ -52,7 +52,13 @@ const GetStarted: React.FC<{ onOpenAuth: () => void; currentTheme: any }> = ({
       </Box>
 
       <Box sx={{ p: 4, display: "flex", justifyContent: "center", gap: 2 }}>
-        <SignInButton onOpenAuth={onOpenAuth} signInText="Get Started" />
+        <SignInButton
+          onOpenAuth={onOpenAuth}
+          signInText="Get Started"
+          bgcolor={currentTheme.primaryButton}
+          bgHoverColor={currentTheme.primary}
+          textColor="#ffff"
+        />
         <Button
           variant="outlined"
           sx={{
@@ -223,6 +229,42 @@ const WastageData: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
     </Box>
   );
 };
+
+const JoinUsComponent: React.FC<{
+  onOpenAuth: () => void;
+  currentTheme: any;
+}> = ({ onOpenAuth, currentTheme }) => {
+  return (
+    <Box sx={{ bgcolor: currentTheme.primary, textAlign: "center", p: 10 }}>
+      <Typography variant="h4" sx={{ color: "#ffff" }}>
+        Ready to Make a Difference?
+      </Typography>
+      <Typography variant="h5" sx={{ color: "#ffff", py: 2 }}>
+        Join our community and help create a world with zero food waste
+      </Typography>
+      <Box sx={{pt:2}}>
+        <SignInButton
+          onOpenAuth={onOpenAuth}
+          signInText="Join Plato Today"
+          bgcolor="#ffff"
+          bgHoverColor="#f1f1f1ff"
+          textColor="#111"
+        />
+      </Box>
+    </Box>
+  );
+  };
+
+const Footer: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
+  return (
+    <Box sx={{p:4, textAlign:"center"}}>
+      <Typography variant="body1" sx={{ color: currentTheme.lightText}}>
+        {" "}
+        &copy; 2025 Plato. Fighting food waste, one meal at a time.
+      </Typography>
+    </Box>
+  );
+};
 const LandingPage: React.FC<LandingPageProps> = ({
   onOpenAuth,
   darkMode,
@@ -244,6 +286,8 @@ const LandingPage: React.FC<LandingPageProps> = ({
       </Box>
       <Box>
         <WastageData currentTheme={currentTheme} />
+        <JoinUsComponent onOpenAuth={onOpenAuth} currentTheme={currentTheme} />
+        <Footer currentTheme={currentTheme} />
       </Box>
     </div>
   );
