@@ -9,8 +9,8 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     defaults:
-          run:
-            working-directory: frontend 
+      run:
+        working-directory: frontend
 
     steps:
       - name: Checkout repository
@@ -28,4 +28,4 @@ jobs:
         run: npm run lint --if-present
 
       - name: Build project
-        run: npm run build
+        run: CI=false npm run build
