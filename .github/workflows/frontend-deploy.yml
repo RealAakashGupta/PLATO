@@ -1,0 +1,38 @@
+name: PR CI - React + TS + MUI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Lint check
+      - name: Run lint
+        run: npm run lint --if-present
+
+      # Run tests
+      - name: Run tests
+        run: npm test -- --watchAll=false --ci
+
+      # Build project (just to ensure it compiles)
+      - name: Build project
+        run: npm run build
