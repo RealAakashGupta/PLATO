@@ -7,6 +7,9 @@ export interface RoleOption {
   description: string;
   icon: React.ElementType;
   benefits?: string[];
+  landingPageLabel:string;
+  landingPageDepsription1: string;
+  landingPageDepsription2: string;
 }
 export const roleOptions: RoleOption[] = [
   {
@@ -20,6 +23,11 @@ export const roleOptions: RoleOption[] = [
       "Join local missions",
       "Build community connections",
     ],
+    landingPageLabel: "Volunteers",
+    landingPageDepsription1:
+      "Community members who help with food collection and distribution",
+    landingPageDepsription2:
+      "Join pickup and delivery missions to bridge the gap between donors and recipients",
   },
   {
     key: "donor",
@@ -32,6 +40,11 @@ export const roleOptions: RoleOption[] = [
       "Tax benefits",
       "Community impact tracking",
     ],
+    landingPageLabel: "Donors",
+    landingPageDepsription1:
+      "Restaurants, grocery stores, and individuals with surplus food",
+    landingPageDepsription2:
+      "Report available food donations and connect with nearby organizations to prevent waste",
   },
   {
     key: "ngo",
@@ -44,6 +57,11 @@ export const roleOptions: RoleOption[] = [
       "Access volunteer network",
       "Resource coordination",
     ],
+    landingPageLabel: "NGOs",
+    landingPageDepsription1:
+      "Organizations that distribute food to communities in need",
+    landingPageDepsription2:
+      "Coordinate with donors and volunteers to receive food donations for your programs",
   },
 ];
 

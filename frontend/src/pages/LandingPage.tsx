@@ -1,8 +1,9 @@
-import React from 'react'
-import LandingPageNavbar from '../components/LandingPageNavbar'
-import { Typography, Box, Button } from '@mui/material';
-import SignInButton from '../components/SignInButton';
-import theme from '../theme';
+import React from "react";
+import LandingPageNavbar from "../components/LandingPageNavbar";
+import { Typography, Box, Button, CardHeader, CardContent, Card, Avatar } from "@mui/material";
+import SignInButton from "../components/SignInButton";
+import theme from "../theme";
+import { RoleOption, roleOptions } from "../utils/SignUp";
 
 interface LandingPageProps {
   onOpenAuth: () => void;
@@ -10,8 +11,10 @@ interface LandingPageProps {
   onToggle: () => void;
 }
 
-const GetStarted: React.FC<{ onOpenAuth: () => void; darkMode: boolean }> = ({ onOpenAuth, darkMode }) => {
-  const currentTheme = darkMode ? theme.dark : theme.light;
+const GetStarted: React.FC<{ onOpenAuth: () => void; currentTheme: any }> = ({
+  onOpenAuth,
+  currentTheme,
+}) => {
   return (
     <Box sx={{ textAlign: "center", mt: 8, color: currentTheme.text }}>
       <Box>
@@ -29,7 +32,10 @@ const GetStarted: React.FC<{ onOpenAuth: () => void; darkMode: boolean }> = ({ o
         </Typography>
       </Box>
       <Box sx={{ mt: 4, maxWidth: 600, margin: "0 auto" }}>
-        <Typography variant="h6" component="p" sx={{ color: currentTheme.text }}>
+        <Typography
+          variant="h6"
+          component="p"
+          sx={{ color: currentTheme.text }}>
           Connect donors, volunteers, and NGOs to redirect surplus food from
           waste to those who need it most. Together, we can build a sustainable
           future.
@@ -44,7 +50,11 @@ const GetStarted: React.FC<{ onOpenAuth: () => void; darkMode: boolean }> = ({ o
             bgcolor: currentTheme.background,
             borderColor: currentTheme.text,
             color: currentTheme.text,
-            "&:hover": { bgcolor: currentTheme.text, borderColor: currentTheme.background, color: currentTheme.background },
+            "&:hover": {
+              bgcolor: currentTheme.text,
+              borderColor: currentTheme.background,
+              color: currentTheme.background,
+            },
           }}>
           Learn More
         </Button>
@@ -69,34 +79,124 @@ const GetStarted: React.FC<{ onOpenAuth: () => void; darkMode: boolean }> = ({ o
   );
 };
 
-const AboutUs: React.FC<{ darkMode : boolean }> = ({ darkMode }) => {
-  const currentTheme = darkMode ? theme.dark : theme.light;
+const AboutUs: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
   return (
-    <Box sx = {{ textAlign:"center", mt:8, py: 8, px: 8, bgcolor: currentTheme.aboutUsBackground }} >
+    <Box
+      sx={{
+        textAlign: "center",
+        mt: 10,
+        py: 10,
+        px: 8,
+        bgcolor: currentTheme.aboutUsBackground,
+      }}>
       <Box>
-        <Typography variant="h3" component="h2" sx={{fontWeight: 600, color: currentTheme.text_heading}}>
+        <Typography
+          variant="h3"
+          component="h2"
+          sx={{ fontWeight: 600, color: currentTheme.text_heading }}>
           How Plato Works
         </Typography>
-        <Typography variant="h6" component="p" sx={{ mt: 2, color: currentTheme.text }}>
-          Our platform connects three key groups to create an efficient food redistribution network
+        <Typography
+          variant="h6"
+          component="p"
+          sx={{ mt: 2, color: currentTheme.text }}>
+          Our platform connects three key groups to create an efficient food
+          redistribution network
         </Typography>
+        <Box sx={{pt:4}}>
+          <RoleTypeCards currentTheme={currentTheme} />
+        </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth, darkMode, onToggle }) => {
+const RoleTypeCards: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
+  return (
+    <Box
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+      gap={3} // spacing between cards
+      p={4}>
+      {roleOptions.map((role: RoleOption) => (
+        <Box
+          key={role.key}
+          flex="1 1 300px" // responsive width
+          maxWidth={345}>
+          <Card
+            sx={{
+              textAlign: "center",
+              p: 3,
+              backgroundColor: currentTheme.background,
+              borderRadius: 3,
+              boxShadow: 4,
+              height: 340,
+              transition: "transform 0.3s, box-shadow 0.3s",
+              "&:hover": {
+                transform: "translateY(-6px)",
+                boxShadow: 8,
+              },
+            }}>
+            <CardHeader
+              title={
+                <Box sx={{ height: 200 }}>
+                  <Avatar
+                    sx={{
+                      bgcolor: currentTheme.primary,
+                      width: 64,
+                      height: 64,
+                      mx: "auto",
+                      mb: 2,
+                    }}>
+                    <role.icon />
+                  </Avatar>
+                  <Typography
+                    variant="h6"
+                    fontWeight="bold"
+                    sx={{ color: currentTheme.text }}>
+                    {role.landingPageLabel}
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: currentTheme.text }}>
+                    {role.landingPageDepsription1}
+                  </Typography>
+                </Box>
+              }
+            />
+            <CardContent>
+              <Typography variant="body2" sx={{ color: currentTheme.text }}>
+                {role.landingPageDepsription2}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      ))}
+    </Box>
+  );
+};
+
+const LandingPage: React.FC<LandingPageProps> = ({
+  onOpenAuth,
+  darkMode,
+  onToggle,
+}) => {
+  const currentTheme = darkMode ? theme.dark : theme.light;
   return (
     <div>
-      <LandingPageNavbar onOpenAuth={onOpenAuth} darkMode={darkMode} onToggle={onToggle} />
+      <LandingPageNavbar
+        onOpenAuth={onOpenAuth}
+        darkMode={darkMode}
+        onToggle={onToggle}
+      />
       <Box sx={{ textAlign: "center", mt: 8 }}>
-        <GetStarted onOpenAuth={onOpenAuth} darkMode={darkMode} />
+        <GetStarted onOpenAuth={onOpenAuth} currentTheme={currentTheme} />
       </Box>
       <Box sx={{ textAlign: "center", mt: 8 }}>
-        <AboutUs darkMode={darkMode} />
+        <AboutUs currentTheme={currentTheme} />
       </Box>
+      
     </div>
   );
-}
+};
 
-export default LandingPage
+export default LandingPage;
