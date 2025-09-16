@@ -26,7 +26,8 @@ const SingInForm: React.FC<{
   currentTheme: any;
   onAuth: "signin" | "signup";
   setAuth: (auth: "signin" | "signup") => void;
-}> = ({ currentTheme, onAuth, setAuth }) => {
+  onClose: () => void;
+}> = ({ currentTheme, onAuth, setAuth, onClose }) => {
   const [formData, setFormData] = useState<SignInData>(defaultSignInData);
   const [error, setError] = useState<string>("");
 
@@ -51,6 +52,7 @@ const SingInForm: React.FC<{
     // Simulate login API
     console.log("Signing in with:", formData);
     toast.success("Login successful!");
+    onClose();
   };
 
   return (
@@ -123,7 +125,7 @@ const SingInForm: React.FC<{
           </Button>
         </Box>
         <hr />
-        <Box sx={{pt:2}}>
+        <Box sx={{ pt: 2 }}>
           <Typography>New to Plato?</Typography>
           <Button
             variant="text"
@@ -175,12 +177,14 @@ const SignInDialog: React.FC<SignInDialogProps> = ({
               currentTheme={currentTheme}
               onAuth={onAuth}
               setAuth={setAuth}
+              onClose={onClose}
             />
           ) : (
             <SignUpDialog
               currentTheme={currentTheme}
               onAuth={onAuth}
               setAuth={setAuth}
+              onClose={onClose}
             />
           )}
         </Box>

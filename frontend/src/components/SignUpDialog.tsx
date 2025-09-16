@@ -26,14 +26,16 @@ import toast from "react-hot-toast";
 interface SignUpDialogProps {
   currentTheme: any;
   onAuth: "signin" | "signup";
-  setAuth: (auth: "signin" | "signup") => void;
+    setAuth: (auth: "signin" | "signup") => void;
+    onClose: () => void;
 }
 
 const SignUpForm: React.FC<{
   currentTheme: any;
   onAuth: "signin" | "signup";
   setAuth: (auth: "signin" | "signup") => void;
-}> = ({ currentTheme, onAuth, setAuth }) => {
+  onClose: () => void;
+}> = ({ currentTheme, onAuth, setAuth, onClose }) => {
   const [formData, setFormData] = useState<SignUpData>(defaultSignUpData);
   const [error, setError] = useState<string>("");
 
@@ -61,6 +63,7 @@ const SignUpForm: React.FC<{
     }
     // Simulate login API
     console.log("Signing up with:", formData);
+    onClose();
     toast.success("Successfully Created!!");
   };
 
@@ -239,6 +242,7 @@ const SignUpDialog: React.FC<SignUpDialogProps> = ({
   currentTheme,
   onAuth,
   setAuth,
+  onClose,
 }) => {
   const [step, setStep] = useState<"role" | "form">("role");
 
@@ -268,7 +272,8 @@ const SignUpDialog: React.FC<SignUpDialogProps> = ({
         <SignUpForm
           currentTheme={currentTheme}
           onAuth={onAuth}
-          setAuth={setAuth}
+                      setAuth={setAuth}
+                      onClose={onClose}
         />
       )}
 
