@@ -123,17 +123,19 @@ const SingInForm: React.FC<{
           </Button>
         </Box>
         <hr />
-        <Typography>New to Plato?</Typography>
-        <Button
-          variant="text"
-          sx={{
-            color: currentTheme.primary,
-            fontWeight: 600,
-            textDecoration: "none",
-          }}
-          onClick={() => setAuth("signup")}>
-          Create an account
-        </Button>
+        <Box sx={{pt:2}}>
+          <Typography>New to Plato?</Typography>
+          <Button
+            variant="text"
+            sx={{
+              color: currentTheme.primary,
+              fontWeight: 600,
+              textDecoration: "none",
+            }}
+            onClick={() => setAuth("signup")}>
+            Create an account
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
