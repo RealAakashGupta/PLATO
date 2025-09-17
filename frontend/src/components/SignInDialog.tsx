@@ -20,6 +20,7 @@ interface SignInDialogProps {
   onAuth: "signin" | "signup";
   setAuth: (auth: "signin" | "signup") => void;
   darkMode: boolean;
+  onSuccess: (user: { username: string, role: string }) => void;
 }
 
 const SingInForm: React.FC<{
@@ -27,7 +28,8 @@ const SingInForm: React.FC<{
   onAuth: "signin" | "signup";
   setAuth: (auth: "signin" | "signup") => void;
   onClose: () => void;
-}> = ({ currentTheme, onAuth, setAuth, onClose }) => {
+  onSuccess: (user: { username: string, role: string }) => void; 
+}> = ({ currentTheme, onAuth, setAuth, onClose, onSuccess }) => {
   const [formData, setFormData] = useState<SignInData>(defaultSignInData);
   const [error, setError] = useState<string>("");
 
@@ -52,6 +54,7 @@ const SingInForm: React.FC<{
     // Simulate login API
     console.log("Signing in with:", formData);
     toast.success("Login successful!");
+    onSuccess({ username: formData.email.split("@")[0], role: "volunteer"}); //hardcoded after fetching data it will change
     onClose();
   };
 
@@ -149,6 +152,7 @@ const SignInDialog: React.FC<SignInDialogProps> = ({
   onAuth,
   setAuth,
   darkMode,
+  onSuccess,
 }) => {
   const currentTheme = darkMode ? theme.dark : theme.light;
   return (
@@ -178,6 +182,7 @@ const SignInDialog: React.FC<SignInDialogProps> = ({
               onAuth={onAuth}
               setAuth={setAuth}
               onClose={onClose}
+              onSuccess={onSuccess}
             />
           ) : (
             <SignUpDialog
@@ -185,6 +190,7 @@ const SignInDialog: React.FC<SignInDialogProps> = ({
               onAuth={onAuth}
               setAuth={setAuth}
               onClose={onClose}
+              onSuccess={onSuccess}
             />
           )}
         </Box>

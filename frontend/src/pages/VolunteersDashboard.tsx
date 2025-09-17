@@ -1,6 +1,6 @@
 import React from 'react'
 
-function VolunteersDashboard() {
+const VolunteersDashboard:React.FC<{ username: string }> = (username) => {
   return (
     <div>VolunteersDashboard</div>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NgosDashBoard() {
+const NgosDashBoard:React.FC<{ username: string }> = (username) => {
   return (
     <div>NgosDashBoard</div>
   )
