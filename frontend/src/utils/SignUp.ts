@@ -10,6 +10,7 @@ export interface RoleOption {
   landingPageLabel: string;
   landingPageDepsription1: string;
   landingPageDepsription2: string;
+  dashboardContent:string;
 }
 export const roleOptions: RoleOption[] = [
   {
@@ -28,6 +29,7 @@ export const roleOptions: RoleOption[] = [
       "Restaurants, grocery stores, and individuals with surplus food",
     landingPageDepsription2:
       "Report available food donations and connect with nearby organizations to prevent waste",
+    dashboardContent: "Thank you for fighting food waste",
   },
   {
     key: "volunteer",
@@ -45,6 +47,7 @@ export const roleOptions: RoleOption[] = [
       "Community members who help with food collection and distribution",
     landingPageDepsription2:
       "Join pickup and delivery missions to bridge the gap between donors and recipients",
+    dashboardContent: "Ready to make a difference today?",
   },
   {
     key: "ngo",
@@ -62,6 +65,7 @@ export const roleOptions: RoleOption[] = [
       "Organizations that distribute food to communities in need",
     landingPageDepsription2:
       "Coordinate with donors and volunteers to receive food donations for your programs",
+    dashboardContent: "Managing community nutrition programs",
   },
 ];
 

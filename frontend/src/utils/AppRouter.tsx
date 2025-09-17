@@ -5,6 +5,7 @@ import VolunteersDashboard from "../pages/VolunteersDashboard";
 import NgosDashBoard from "../pages/NgosDashBoard";
 import DonorsDashboard from "../pages/DonorsDashboard";
 import { roleRoutes } from "./Routes";
+import theme from "../theme";
 
 interface ProtectedRouteProps {
   element: React.ReactElement;
@@ -31,7 +32,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 const RoleBasedDashboard: React.FC<{
   isAuthenticated: boolean;
   currentRole: string | null;
-}> = ({ isAuthenticated, currentRole }) => {
+  currentTheme: any;
+  darkMode: boolean;
+  onToggle: () => void;
+}> = ({ isAuthenticated, currentRole, currentTheme, darkMode, onToggle }) => {
   const { role: urlRole, username } = useParams();
 
   if (!isAuthenticated) return <Navigate to={roleRoutes.landing} replace />;
@@ -46,7 +50,15 @@ const RoleBasedDashboard: React.FC<{
     case "donor":
       return (
         <ProtectedRoute
-          element={<DonorsDashboard username={username} />}
+          element={
+            <DonorsDashboard
+              username={username}
+              currentTheme={currentTheme}
+              darkMode={darkMode}
+              onToggle={onToggle}
+              urlRole={urlRole}
+            />
+          }
           isAuthenticated={isAuthenticated}
           allowedRole="donor"
           currentRole={currentRole}
@@ -55,7 +67,15 @@ const RoleBasedDashboard: React.FC<{
     case "ngo":
       return (
         <ProtectedRoute
-          element={<NgosDashBoard username={username} />}
+          element={
+            <NgosDashBoard
+              username={username}
+              currentTheme={currentTheme}
+              darkMode={darkMode}
+              onToggle={onToggle}
+              urlRole={urlRole}
+            />
+          }
           isAuthenticated={isAuthenticated}
           allowedRole="ngo"
           currentRole={currentRole}
@@ -64,7 +84,15 @@ const RoleBasedDashboard: React.FC<{
     case "volunteer":
       return (
         <ProtectedRoute
-          element={<VolunteersDashboard username={username} />}
+          element={
+            <VolunteersDashboard
+              username={username}
+              currentTheme={currentTheme}
+              darkMode={darkMode}
+              onToggle={onToggle}
+              urlRole={urlRole}
+            />
+          }
           isAuthenticated={isAuthenticated}
           allowedRole="volunteer"
           currentRole={currentRole}
@@ -74,7 +102,6 @@ const RoleBasedDashboard: React.FC<{
       return <Navigate to={roleRoutes.landing} replace />;
   }
 };
-
 
 export const AppRouter: React.FC<{
   role: string | null;
@@ -91,6 +118,7 @@ export const AppRouter: React.FC<{
   darkMode,
   onToggle,
 }) => {
+  const currentTheme = darkMode ? theme.dark : theme.light;
   return (
     <Routes>
       {/* Landing page */}
@@ -112,6 +140,9 @@ export const AppRouter: React.FC<{
           <RoleBasedDashboard
             isAuthenticated={isAuthenticated}
             currentRole={role}
+            currentTheme={currentTheme}
+            darkMode={darkMode}
+            onToggle={onToggle}
           />
         }
       />
