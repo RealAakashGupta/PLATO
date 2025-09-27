@@ -25,7 +25,7 @@ const GetStarted: React.FC<{ onOpenAuth: () => void; currentTheme: any }> = ({
   currentTheme,
 }) => {
   return (
-    <Box sx={{ textAlign: "center", mt: 8, color: currentTheme.text }}>
+    <Box sx={{ textAlign: "center", mt: 8, color: currentTheme.text, px: { md: 8, xs: 4 } }}>
       <Box>
         <Typography
           variant="h3"
@@ -51,7 +51,7 @@ const GetStarted: React.FC<{ onOpenAuth: () => void; currentTheme: any }> = ({
         </Typography>
       </Box>
 
-      <Box sx={{ p: 4, display: "flex", justifyContent: "center", gap: 2 }}>
+      <Box sx={{ p: 4, display: "flex", justifyContent: "center", gap: 2, flexDirection: { xs: "column", sm: "row" }}}>
         <SignInButton
           onOpenAuth={onOpenAuth}
           signInText="Get Started"
@@ -132,47 +132,57 @@ const RoleTypeCards: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
       display="flex"
       flexWrap="wrap"
       justifyContent="center"
-      gap={3} // spacing between cards
-      p={4}>
+      gap={{ xs: 2, sm: 3, md: 4 }}
+      p={{ xs: 2, sm: 3, md: 4 }}>
       {roleOptions.map((role: RoleOption) => (
         <Box
           key={role.key}
-          flex="1 1 300px" // responsive width
-          maxWidth={345}>
+          flex={{ xs: "1 1 100%", sm: "1 1 45%", md: "1 1 30%" }}
+          maxWidth={{ xs: "100%", sm: 345, md: 345 }}>
           <Card
             sx={{
               textAlign: "center",
-              p: 3,
+              p: { xs: 2, sm: 3 },
               backgroundColor: currentTheme.background,
               borderRadius: 3,
               boxShadow: 4,
-              height: 340,
+              height: "auto",
               transition: "transform 0.3s, box-shadow 0.3s",
               "&:hover": {
                 transform: "translateY(-6px)",
                 boxShadow: 8,
               },
+              display: "flex",
+              flexDirection: "column",
             }}>
             <CardHeader
               title={
-                <Box sx={{ height: 200 }}>
+                <Box>
                   <Avatar
                     sx={{
                       bgcolor: currentTheme.roleBgColors[role.key],
-                      width: 64,
-                      height: 64,
+                      width: { xs: 56, sm: 64 },
+                      height: { xs: 56, sm: 64 },
                       mx: "auto",
                       mb: 2,
                     }}>
-                    <role.icon sx={{ width: "45%", height: "45%", color: currentTheme.roleColors[role.key] }} />
+                    <role.icon
+                      style={{
+                        width: "45%",
+                        height: "45%",
+                        color: currentTheme.roleColors[role.key],
+                      }}
+                    />
                   </Avatar>
                   <Typography
                     variant="h6"
                     fontWeight="bold"
-                    sx={{ color: currentTheme.text }}>
+                    sx={{ color: currentTheme.text, mb: 1 }}>
                     {role.landingPageLabel}
                   </Typography>
-                  <Typography variant="body1" sx={{ color: currentTheme.text }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: currentTheme.text, mb: 1 }}>
                     {role.landingPageDepsription1}
                   </Typography>
                 </Box>
@@ -189,6 +199,9 @@ const RoleTypeCards: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
     </Box>
   );
 };
+
+
+
 
 const WastageData: React.FC<{ currentTheme: any }> = ({ currentTheme }) => {
   return (
