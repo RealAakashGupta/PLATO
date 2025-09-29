@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 interface SignInButtonProps {
   signInText: string;
   onOpenAuth: () => void;
@@ -15,7 +15,6 @@ const SignInButton: React.FC<SignInButtonProps> = ({
   textColor,
 }) => {
   return (
-    <Box>
       <Button
         variant="contained"
         onClick={onOpenAuth}
@@ -26,7 +25,6 @@ const SignInButton: React.FC<SignInButtonProps> = ({
         }}>
         {signInText}
       </Button>
-    </Box>
   );
 };
 

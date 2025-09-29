@@ -1,6 +1,7 @@
 import React from 'react'
 import DashboardNavbar from '../components/DashboardNavbar';
 import { Box } from '@mui/material';
+import Achievement from '../components/Achievement';
 
 interface NgosDashBoardProps {
   username: string;
@@ -25,6 +26,9 @@ const NgosDashBoard: React.FC<NgosDashBoardProps> = ({
         onToggle={onToggle}
         urlRole={urlRole}
       />
+      <Box sx={{ px: 5 }}>
+        <Achievement currentTheme={currentTheme} urlRole={urlRole} />
+      </Box>
     </Box>
   );
 };

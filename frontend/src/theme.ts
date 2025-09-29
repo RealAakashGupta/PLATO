@@ -17,7 +17,13 @@ const theme = {
       donor: "#004683ff",
       volunteer: "#014b1cff",
       ngo: "#320060ff",
-    }
+    },
+    achievement: {
+      0: "#00e052ff",
+      1: "#0087d4ff",
+      2: "#dfd800ff",
+      3: "#9829ffff",
+    },
   },
   dark: {
     background: "#121212",
@@ -38,7 +44,13 @@ const theme = {
       volunteer: "#0a5e29ff",
       ngo: "#5400a3ff",
     },
-  }
+    achievement: {
+      0: "#5dd361ff",
+      1: "#0076deff",
+      2: "#dcd500ff",
+      3: "#8400ffff",
+    },
+  },
 };
 
 export default theme;
