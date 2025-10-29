@@ -4,7 +4,6 @@ import DarkModeToggle from "./DarkModeToggle";
 import { roleOptions } from "../utils/SignUp";
 import { useNavigate } from "react-router-dom";
 
-
 interface DashboardNavbarProps {
   username: string;
   currentTheme: any;
@@ -68,7 +67,7 @@ const DashboardNav: React.FC<DashboardNavbarProps> = ({
           </Button>
         </Box>
       </Box>
-      <Box sx={{ pt: 2, px: 5, color: currentTheme.lightText }}>
+      <Box sx={{ pt: 2, color: currentTheme.primary }}>
         <hr />
       </Box>
     </Box>

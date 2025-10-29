@@ -161,7 +161,7 @@ const ChooseRole: React.FC<{
             <Box
               key={role.key}
               sx={{
-                border: "1px solid",
+                border: "2px solid",
                 borderColor: isSelected
                   ? currentTheme.primary
                   : currentTheme.text,

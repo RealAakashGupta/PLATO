@@ -4,7 +4,8 @@ import { Box, Button, Typography } from '@mui/material';
 import Achievement from '../components/Achievement';
 import AddIcon from "@mui/icons-material/Add";
 import NgoDistribution from '../components/NgoDistribution';
-
+import ImpactCard from '../components/ImpactCard';
+import NgoImpact from '../static/images/ngo_impact.jpg'
 interface NgosDashBoardProps {
   username: string;
   currentTheme: any;
@@ -54,6 +55,11 @@ const NgosDashBoard: React.FC<NgosDashBoardProps> = ({
           </Typography>
         </Box>
       </Box>
+      <ImpactCard
+        header={"Community Impact"}
+        currentTheme={currentTheme}
+        image={NgoImpact}
+      />
     </Box>
   );
 };

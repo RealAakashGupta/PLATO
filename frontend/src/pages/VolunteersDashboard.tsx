@@ -3,6 +3,8 @@ import DashboardNavbar from "../components/DashboardNavbar";
 import { Box, Typography } from "@mui/material";
 import Achievement from "../components/Achievement";
 import VolunteersMission from "../components/VolunteersMission";
+import ImpactCard from "../components/ImpactCard";
+import VolunteerImpact from "../static/images/volunteers_impact.jpg";
 interface VolunteersDashboardProps {
   username: string;
   currentTheme: any;
@@ -36,6 +38,11 @@ const VolunteersDashboard: React.FC<VolunteersDashboardProps> = ({
           <VolunteersMission currentTheme={currentTheme} urlRole={urlRole} />
         </Box>
       </Box>
+      <ImpactCard
+        header={"Your Impact"}
+        currentTheme={currentTheme}
+        image={VolunteerImpact}
+      />
     </Box>
   );
 };

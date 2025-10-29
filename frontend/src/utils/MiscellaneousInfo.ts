@@ -29,6 +29,20 @@ export const foodWastageInfo: FoodWastageInfo[] = [
   },
 ];
 
+export interface VolunteerImpactInfo{
+  values: string;
+  info: string;
+}
+export const volunteerImpactInfo: VolunteerImpactInfo[] = [
+  {
+    values: "342kg",
+    info: "of food waste prevented",
+  },
+  {
+    values: "≈ 684 meals",
+    info: "provided to those in need",
+  },
+];
 export interface VolunteerAchievementInfo{
   icon: React.ElementType;
   values: string;

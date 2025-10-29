@@ -4,7 +4,8 @@ import { Box, Button, Typography } from '@mui/material';
 import Achievement from '../components/Achievement';
 import AddIcon from "@mui/icons-material/Add";
 import DonorDonation from '../components/DonorDonation';
-
+import ImpactCard from '../components/ImpactCard';
+import DonorImpact from '../static/images/donors_impact.jpg'
 interface DonorsDashboardProps {
   username: string;
   currentTheme: any;
@@ -49,6 +50,11 @@ const DonorsDashboard: React.FC<DonorsDashboardProps> = ({
           <DonorDonation currentTheme={currentTheme} urlRole={urlRole} />
         </Box>
       </Box>
+      <ImpactCard
+        header={"Your Impact"}
+        currentTheme={currentTheme}
+        image={DonorImpact}
+      />
     </Box>
   );
 };
