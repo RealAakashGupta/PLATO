@@ -40,7 +40,7 @@ const DonorsDashboard: React.FC<DonorsDashboardProps> = ({
               variant="contained"
               startIcon={<AddIcon />}
               sx={{
-                color: currentTheme.text,
+                color: '#fff',
                 bgcolor: currentTheme.primary,
               }}>
               New Donation

@@ -6,6 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import NgoDistribution from '../components/NgoDistribution';
 import ImpactCard from '../components/ImpactCard';
 import NgoImpact from '../static/images/ngo_impact.jpg'
+import DonationAvailable from '../components/DonationAvailable';
 interface NgosDashBoardProps {
   username: string;
   currentTheme: any;
@@ -53,6 +54,8 @@ const NgosDashBoard: React.FC<NgosDashBoardProps> = ({
           <Typography variant="h5" sx={{ color: currentTheme.text }}>
             Available Donations
           </Typography>
+          <DonationAvailable currentTheme={currentTheme} urlRole={urlRole} />
+          <DonationAvailable currentTheme={currentTheme} urlRole={urlRole} />
         </Box>
       </Box>
       <ImpactCard
